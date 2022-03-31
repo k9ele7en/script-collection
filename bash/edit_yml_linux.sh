@@ -34,3 +34,34 @@ yq eval '.annotations.["artifacthub.io/images"] = "'${image}'"' file.yml
 TARGET_DATA_DIR=$1 yq -i '.data_directory = strenv(TARGET_DATA_DIR)' config.yml
 
 # ex: sh script/set_data_directory.sh /data/Data_OK
+
+###########################
+### find all key by parent level, set base on ENV Var
+
+#!/bin/sh
+key1="ABC"
+key2="changed"
+key3=FALSE
+
+# cat ../config.yml | yq e '.parent | has("$key1")'
+
+# echo ------
+# has_eng=$(cat ../config.yml | yq e '.parent | has("$key1")')
+# if [ "$has_eng" == "true" ]; then
+#     echo has key1
+# fi
+# echo ---------
+
+ENG_KEY=$(yq e '(.parent | keys)[]' ../config.yml)
+
+for KEY in $ENG_KEY
+do
+    if [[ -z ${KEY} || ! -v ${KEY} ]]; then
+        continue
+    else
+        #variable variables
+        ENV_VAL=${!KEY}
+        echo key: $KEY change to: $ENV_VAL
+        yq -i ".parent.${KEY} = \"$ENV_VAL\"" ../config.yml
+    fi
+done
