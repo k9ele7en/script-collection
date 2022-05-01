@@ -29,3 +29,15 @@ sudo add-apt-repository contrib
 ##if update fail bc key not found then https://developer.nvidia.com/blog/updating-the-cuda-linux-gpg-repository-key/
 sudo apt-get update
 sudo apt-get -y install cuda
+
+
+######Uninstall clean
+sudo apt-get remove --purge '^nvidia-.*'
+sudo apt-get remove --purge '^libnvidia-.*'
+sudo apt-get remove --purge '^cuda-.*'
+
+##if The issue was started after did some updates, and the Linux kernel was changed.
+sudo apt-get install linux-headers-$(uname -r)
+
+##then try again installing by .run file or apt...
+
