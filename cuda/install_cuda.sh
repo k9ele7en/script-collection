@@ -41,3 +41,7 @@ sudo apt-get install linux-headers-$(uname -r)
 
 ##then try again installing by .run file or apt...
 
+
+###if run docker with gpus, install nvidia-docker2
+# https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+
