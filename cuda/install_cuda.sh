@@ -35,6 +35,16 @@ sudo apt-get -y install cuda
 sudo apt-get remove --purge '^nvidia-.*'
 sudo apt-get remove --purge '^libnvidia-.*'
 sudo apt-get remove --purge '^cuda-.*'
+sudo apt-get --purge remove "*cuda*" "*cublas*" "*cufft*" "*cufile*" "*curand*" \
+ "*cusolver*" "*cusparse*" "*gds-tools*" "*npp*" "*nvjpeg*" "nsight*" 
+# To remove NVIDIA Drivers:
+sudo apt-get --purge remove "*nvidia*"
+# To clean up the uninstall:
+sudo apt-get autoremove
+# To uninstall the CUDA Toolkit, run the uninstallation script provided in the bin directory of the toolkit. By default, it is located in /usr/local/cuda-11.7/bin:
+sudo /usr/local/cuda-11.7/bin/cuda-uninstaller
+# To uninstall the NVIDIA Driver, run nvidia-uninstall:
+sudo /usr/bin/nvidia-uninstall
 
 ##if The issue was started after did some updates, and the Linux kernel was changed.
 sudo apt-get install linux-headers-$(uname -r)
